@@ -12,6 +12,10 @@ enum Engine {Petrol, Diesel, Electric, Hybrid};
 
 class Model
 {
+
+  friend ostream& operator<<(ostream& out, const Model& m);
+  friend istream& operator>>(istream& in, Model& m);
+  
   private:
     string  name;
     int     power;
@@ -36,5 +40,6 @@ class Model
 
     void display() const;
 };
+
 }
 #endif

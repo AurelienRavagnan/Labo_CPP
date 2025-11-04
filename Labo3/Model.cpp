@@ -1,5 +1,6 @@
 #include "Model.h"
 #include <cstring>
+#include <limits>
 
 using namespace std;
 namespace carconfig
@@ -101,4 +102,49 @@ void Model::display() const
 
     cout << "Base Price: " << basePrice << " €" << endl;
 }
+
+ostream& operator<<(ostream& os, const Model& m)
+{
+    os << "Nom: " << m.getName()
+       << ", Puissance: " << m.getPower() << " HP"
+       << ", Moteur: ";
+
+    switch (m.getEngine()) {
+        case Petrol:   os << "Petrol"; break;
+        case Diesel:   os << "Diesel"; break;
+        case Electric: os << "Electric"; break;
+        case Hybrid:   os << "Hybrid"; break;
+    }
+
+    os << ", Prix de base: " << m.getBasePrice() << " €";
+    return os;
+}
+
+istream& operator>>(istream& is, Model& m)
+    {
+        string nom;
+        int puissance;
+        int moteur;
+        float prix;
+
+        cout << "  Nom du modele : ";
+        is.ignore(numeric_limits<streamsize>::max(), '\n'); // vide le buffer
+        getline(is, nom);
+
+        cout << "  Puissance (HP) : ";
+        is >> puissance;
+
+        cout << "  Type moteur (0=Petrol, 1=Diesel, 2=Electric, 3=Hybrid) : ";
+        is >> moteur;
+
+        cout << "  Prix de base : ";
+        is >> prix;
+
+        m.setName(nom);
+        m.setPower(puissance);
+        m.setEngine(static_cast<Engine>(moteur));
+        m.setBasePrice(prix);
+
+        return is;
+    }
 }

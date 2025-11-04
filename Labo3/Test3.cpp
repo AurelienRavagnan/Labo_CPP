@@ -10,12 +10,12 @@ int  Menu();
 void Essai1();
 void Essai2();
 void Essai3();
-/*void Essai4();
+void Essai4();
 void Essai5();
 void Essai6();
 void Essai7();
 void Essai8();
-void Essai9();*/
+void Essai9();
 
 int main(int argc,char* argv[])
 {
@@ -31,12 +31,12 @@ int main(int argc,char* argv[])
       case 1 : Essai1(); break;
       case 2 : Essai2(); break;
       case 3 : Essai3(); break;
-      /*case 4 : Essai4(); break;
+      case 4 : Essai4(); break;
       case 5 : Essai5(); break;
       case 6 : Essai6(); break;
       case 7 : Essai7(); break;
       case 8 : Essai8(); break;
-      case 9 : Essai9(); break;*/
+      case 9 : Essai9(); break;
       default : fini = true ; break;
     }
   }
@@ -54,12 +54,12 @@ int Menu()
   std::cout << " 1. Tests de l'operateur = de la classe Car" << std::endl;
   std::cout << " 2. Tests des operateurs + de la classe Car" << std::endl;
   std::cout << " 3. Tests des operateurs - de la classe Car" << std::endl;
-  /*std::cout << " 4. Tests des operateurs < > == de la classe Car" << std::endl;
+  std::cout << " 4. Tests des operateurs < > == de la classe Car" << std::endl;
   std::cout << " 5. Tests des operateurs << et >> de la classe Option" << std::endl;
   std::cout << " 6. Tests des operateurs << et >> de la classe Model" << std::endl;
   std::cout << " 7. Tests de l'operateur << de la classe Car" << std::endl;
   std::cout << " 8. Tests des operateurs de pre/post decrementation de la classe Option" << std::endl;
-  std::cout << " 9. Tests de l'opérateur [] de Car" << std::endl;*/
+  std::cout << " 9. Tests de l'opérateur [] de Car" << std::endl;
   std::cout << "10. Quitter" << std::endl << std::endl;
 
   int ch;
@@ -149,7 +149,7 @@ void Essai3()
 /*******************************************************************************************************/
 /*** Test des opérateurs < > == de la classe Car *******************************************************/
 /*******************************************************************************************************/
-/*void Essai4()
+void Essai4()
 {
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(4) Tests des opérateurs < > == de Car *******************************" << std::endl;
@@ -177,7 +177,7 @@ void Essai3()
 /*******************************************************************************************************/
 /*** Test des opérateurs << et >> de la classe Option **************************************************/
 /*******************************************************************************************************/
-/*void Essai5()
+void Essai5()
 {
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(5) ***** Tests des opérateurs << et >> de Option ********************" << std::endl;
@@ -192,7 +192,7 @@ void Essai3()
 /*******************************************************************************************************/
 /*** Test des opérateurs << et >> de la classe Model ***************************************************/
 /*******************************************************************************************************/
-/*void Essai6()
+void Essai6()
 {
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(6) ***** Tests des opérateurs << et >> de Model *********************" << std::endl;
@@ -202,12 +202,12 @@ void Essai3()
   std::cin >> m;
   std::cout << std::endl << "Voici le modele que vous avez encode :" << std::endl;
   std::cout << m << std::endl << std::endl;
-}*/
+}
 
 /*******************************************************************************************************/
 /*** Test de l'opérateur << de la classe Car ***********************************************************/
 /*******************************************************************************************************/
-/*void Essai7()
+void Essai7()
 {
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(7) ***** Tests de l'opérateur << de Car *****************************" << std::endl;
@@ -222,12 +222,12 @@ void Essai3()
 
   std::cout << std::endl << "Voici le projet de voiture (avec options) :" << std::endl;
   std::cout << c << std::endl;
-}*/
+}
 
 /*******************************************************************************************************/
 /*** Tests des operateurs de pre/post decrementation de la classe Option *******************************/
 /*******************************************************************************************************/
-/*void Essai8()
+void Essai8()
 {
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(8.a) ***** Test de l'operateur de pre-decrementation ****************" << std::endl;
@@ -246,12 +246,13 @@ void Essai3()
   std::cout << "Resultat de std::cout << op2-- << std::endl; :" << std::endl;  
   std::cout << op2-- << std::endl;        // Si tout va bien, op2 est decremente apres avoir ete affiche !
   std::cout << "et on reaffiche op2 : " << op2 << std::endl << std::endl;
-}*/
+}
 
 /*******************************************************************************************************/
 /*** Tests de l'opérateur [] de la classe Car **********************************************************/
 /*******************************************************************************************************/
-/*{
+void Essai9()
+{
   std::cout << "**********************************************************************" << std::endl;
   std::cout << "(9) ***** Tests de l'opérateur [] de Car *****************************" << std::endl;
   std::cout << "**********************************************************************" << std::endl;
@@ -276,4 +277,3 @@ void Essai3()
     else std::cout << "---" << std::endl;
   }
 }
-*/

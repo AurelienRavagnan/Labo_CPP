@@ -191,4 +191,37 @@ namespace carconfig
     copie.removeOption(code);
     return copie;
   }
+
+  bool Car::operator<(const Car& other) const
+  {
+    return this->getPrice() < other.getPrice();
+  }
+
+  bool Car::operator>(const Car& other) const
+  {
+    return this->getPrice() > other.getPrice();
+  }
+
+  bool Car::operator==(const Car& other) const
+  {
+    return this->getPrice() == other.getPrice();
+  }
+
+  ostream& operator<<(ostream& out, const Car& c)
+  {
+    out << c.getName() << ", " << c.getModel() << ", ";  //sorti par exemple -> Toyota, Supra, 
+    for(int compt = 0; compt < 5; compt ++) //boucle pour les 5 options possibles de la voiture.
+    {
+      if (c.options[compt] != nullptr) //on vérifie que l'autre voiture contient bien la compt-ème option.
+      out << (*(c.options[compt])); // on ajoute l'option exsistante ( * on passe d'un pointeur a en objet)
+    }
+
+    return out; 
+  }
+
+  Option* Car::operator[](int i) const
+  {
+    return options[i]; 
+  }
+
 }

@@ -1,97 +1,121 @@
 #include "Model.h"
+#include <iostream>
 #include <cstring>
 
 using namespace std;
+
 namespace carconfig
 {
-//-----------CONSTRUCTEURS------------------
+//----------- CONSTRUCTEURS ------------------
 Model::Model()
 {
-  cout << ">>>> Model : constructeur par defaut <<<<" << endl;
-  name = "---";
-  setName("nom");
-  setPower(0);
-  setEngine(Engine::Petrol);
-  setBasePrice(0.0);
+    cout << ">>>> Model : constructeur par defaut <<<<" << endl;
+    name = nullptr;
+    setName("nom");
+    setPower(0);
+    setEngine(Engine::Petrol);
+    setBasePrice(0.0f);
 }
 
-Model::Model(const string& n, int p, Engine e, float bp)
+Model::Model(const char* n, int p, Engine e, float bp)
 {
-  cout << ">>>> Model : constructeur d'initialisation <<<<" << endl;
-  name = n;
-  power = p;
-  engine = e;
-  basePrice = bp;
+    cout << ">>>> Model : constructeur d'initialisation <<<<" << endl;
+    name = nullptr;
+    setName(n);      // Copie profonde
+    setPower(p);
+    setEngine(e);
+    setBasePrice(bp);
 }
 
 Model::Model(const Model &m)
 {
-  cout << ">>>> Model : constructeur de copie <<<<" << endl;
-  name = m.name;
-  power = m.power;
-  engine = m.engine;
-  basePrice = m.basePrice;
+    cout << ">>>> Model : constructeur de copie <<<<" << endl;
+    name = nullptr;
+    setName(m.name);  // Copie profonde
+    setPower(m.power);
+    setEngine(m.engine);
+    setBasePrice(m.basePrice);
 }
-//--------DESTRUCTEUR-------------
+
+//-------- DESTRUCTEUR -------------
 Model::~Model()
 {
-  cout << ">>>> Model : destructeur <<<<" << endl;
+    cout << ">>>> Model : destructeur <<<<" << endl;
+    delete[] name;
+    name = nullptr;
 }
 
-//--------SET & GET----------------
-
-void Model::setName(const string& n)
+//-------- OPÉRATEUR D’AFFECTATION ----------------
+Model& Model::operator=(const Model& m)
 {
-name = n;
+    if (this != &m) // éviter auto-affectation
+    {
+        setName(m.name); // copie profonde
+        setPower(m.power);
+        setEngine(m.engine);
+        setBasePrice(m.basePrice);
+    }
+    return *this;
+}
+
+//-------- SETTERS & GETTERS ----------------
+void Model::setName(const char* n)
+{
+    if (!n) return;
+
+    // Libérer l'ancienne mémoire
+    delete[] name;
+    name = new char[strlen(n)+1];
+    strcpy(name, n);
 }
 
 void Model::setPower(int p)
 {
-  if (p < 0) return;
-  power = p;
+    if (p >= 0)
+        power = p;
 }
 
 void Model::setEngine(Engine e)
 {
-  engine = e;
+    engine = e;
 }
 
 void Model::setBasePrice(float bp)
 {
-  if (bp < 0) return;
-  basePrice = bp;
+    if (bp >= 0)
+        basePrice = bp;
 }
 
-
-const string& Model::getName() const
+const char* Model::getName() const
 {
-  return name;
+    return name;
 }
 
-int         Model::getPower() const
+int Model::getPower() const
 {
-  return power;
+    return power;
 }
 
-Engine      Model::getEngine() const
+Engine Model::getEngine() const
 {
-  return engine;
+    return engine;
 }
 
-float       Model::getBasePrice() const
+float Model::getBasePrice() const
 {
-  return basePrice;
+    return basePrice;
 }
 
-//------------------METHODES---------------------
+//------------------ METHODES ---------------------
 void Model::display() const
 {
     cout << "=== Model Info ===" << endl;
-    cout << "Name      : " << name << endl;
+    cout << "Name      : " << (name ? name : "---") << endl;
     cout << "Power     : " << power << " HP" << endl;
 
     cout << "Engine    : ";
-    switch (engine) {
+    switch (engine)
+    {
         case Petrol:   cout << "Petrol"; break;
         case Diesel:   cout << "Diesel"; break;
         case Electric: cout << "Electric"; break;
@@ -102,3 +126,4 @@ void Model::display() const
     cout << "Base Price: " << basePrice << " €" << endl;
 }
 }
+

@@ -27,6 +27,11 @@ namespace carconfig
         friend Car operator+(const Option& opt, const Car& c);
         Car operator-(const Option& opt) const;
         Car operator-(const string& code) const;
+        bool operator<(const Car& other) const;
+        bool operator>(const Car& other) const;
+        bool operator==(const Car& other) const;
+        Option* operator[](int i) const; 
+        friend ostream& operator<<(ostream& out, const Car& c);
         ~Car();
 
         //Set&Get :
