@@ -3,43 +3,52 @@
 
 #include <iostream>
 #include <cstring>
-using namespace std;
 
-namespace carconfig
-{
+namespace carconfig {
 
-enum Engine {Petrol, Diesel, Electric, Hybrid};
+enum Engine { Petrol, Diesel, Electric, Hybrid };
 
 class Model
 {
+private:
+    char*  name;
+    int    power;
+    Engine engine;
+    float  basePrice;
 
-  friend ostream& operator<<(ostream& out, const Model& m);
-  friend istream& operator>>(istream& in, Model& m);
-  
-  private:
-    string  name;
-    int     power;
-    Engine  engine;
-    float   basePrice;
+    // utilitaire interne pour dupliquer une c-string
+    static char* duplicate(const char* s);
 
-  public:
+public:
+    // constructeurs / destructeur
     Model();
-    Model(const string& n, int p, Engine e, float bp);
-    Model(const Model &m);
+    Model(const char* n, int p, Engine e, float bp);
+    Model(const Model& m);
     ~Model();
 
-    void setName(const string& n);
+    // opérateur d'affectation (pour éviter shallow copy)
+    Model& operator=(const Model& m);
+
+    // setters
+    void setName(const char* n);
     void setPower(int p);
     void setEngine(Engine e);
     void setBasePrice(float bp);
 
-    const string& getName() const;
+    // getters
+    const char* getName() const;
     int         getPower() const;
     Engine      getEngine() const;
     float       getBasePrice() const;
 
+    // affichage
     void display() const;
 };
 
-}
-#endif
+// opérateurs de flux (dans le namespace)
+std::ostream& operator<<(std::ostream& os, const Model& m);
+std::istream& operator>>(std::istream& is, Model& m);
+
+} // namespace carconfig
+
+#endif // MODEL_H
