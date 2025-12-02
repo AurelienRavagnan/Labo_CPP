@@ -2,21 +2,19 @@
 #include <iostream>
 #include "Model.h"
 #include "Option.h"
-using namespace std;
 
 namespace carconfig
 {
 
   //-----------Constructeurs----------
-  Car::Car()
-  {
+ Car::Car()
+{
     cout << ">>> Car : constructeur par défaut <<<" << endl;
     name = "---";
-    Model();
-    for(int i = 0 ; i < 5; i++){
-        options[i] = NULL;
+    for(int i = 0; i < 5; i++) {
+        options[i] = nullptr;
     }
-  }
+}
 
   Car::Car(const string& n, Model m)
   {

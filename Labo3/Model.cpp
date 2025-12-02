@@ -19,14 +19,18 @@ char* Model::duplicate(const char* s) {
 Model::Model()
 : name(nullptr), power(0), engine(Petrol), basePrice(0.0f)
 {
+    #ifdef DEBUG
     cout << ">>>> Model : constructeur par defaut <<<<" << endl;
+    #endif
     setName("nom");
 }
 
 Model::Model(const char* n, int p, Engine e, float bp)
 : name(nullptr), power(0), engine(e), basePrice(bp)
 {
+    #ifdef DEBUG
     cout << ">>>> Model : constructeur d'initialisation <<<<" << endl;
+    #endif
     setName(n);
     setPower(p);
     setEngine(e);
@@ -36,7 +40,9 @@ Model::Model(const char* n, int p, Engine e, float bp)
 Model::Model(const Model& m)
 : name(nullptr), power(m.power), engine(m.engine), basePrice(m.basePrice)
 {
+    #ifdef DEBUG
     cout << ">>>> Model : constructeur de copie <<<<" << endl;
+    #endif
     if (m.name) name = duplicate(m.name);
 }
 
@@ -57,7 +63,9 @@ Model& Model::operator=(const Model& m) {
 
 Model::~Model()
 {
+    #ifdef DEBUG
     cout << ">>>> Model : destructeur <<<<" << endl;
+    #endif
     delete[] name;
     name = nullptr;
 }
@@ -127,14 +135,12 @@ ostream& operator<<(ostream& os, const Model& m)
 
 istream& operator>>(istream& is, Model& m)
 {
-    // lecture interactive sécurisée
     char buffer[256];
     int puissance = 0;
     int moteur = 0;
     float prix = 0.0f;
 
     cout << "  Nom du modele : ";
-    // vider la ligne précédente puis lire une ligne
     is.ignore(numeric_limits<streamsize>::max(), '\n');
     is.getline(buffer, sizeof(buffer));
 
@@ -155,4 +161,4 @@ istream& operator>>(istream& is, Model& m)
     return is;
 }
 
-} // namespace carconfig
+}

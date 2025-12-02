@@ -4,9 +4,12 @@ using namespace std;
 
 namespace carconfig 
 {
+    //Constructeur
     Option::Option() 
     {
+        #ifdef DEBUG
         cout << ">>> Option : constructeur par défaut <<<" << endl;
+        #endif
         code = "---";
         label = "---";
         price = 0.0f;
@@ -14,7 +17,9 @@ namespace carconfig
 
     Option::Option(const string& c, const string& l, float p) 
     {
+        #ifdef DEBUG
         cout << ">>> Option : constructeur d'initialisation <<<" << endl;
+        #endif
         code = c;
         label = l;
         price = p;
@@ -22,32 +27,60 @@ namespace carconfig
 
     Option::Option(const Option& o) 
     {
+        #ifdef DEBUG
         cout << ">>> Option : constructeur de copie <<<" << endl;
+        #endif
         code = o.code;
         label = o.label;
         price = o.price;
     }
 
+    //Destructeur
     Option::~Option() 
     {
+        #ifdef DEBUG
         cout << ">>> Option : destructeur <<<" << endl;
+        #endif
     }
 
-    void Option::setCode(const string& c) { code = c; }
-    void Option::setLabel(const string& l) { label = l; }
-    void Option::setPrice(float p) { if(p >= 0) price = p; }
-    void Option::setIntitule(const std::string& i) {
-    label = i;
+    //Setter
+    void Option::setCode(const string& c) 
+    { 
+        code = c; 
+    }
+    void Option::setLabel(const string& l) 
+    { 
+        label = l; 
+    }
+    void Option::setPrice(float p) 
+    { 
+        if(p >= 0) price = p; 
+    }
+    void Option::setIntitule(const std::string& i) 
+    {
+        label = i;
     }
 
-    string Option::getCode() const { return code; }
-    string Option::getLabel() const { return label; }
-    float Option::getPrice() const { return price; }
-    const std::string& Option::getIntitule() const {
-    return label;
+    //Getter
+    string Option::getCode() const 
+    { 
+        return code; 
+    }
+    string Option::getLabel() const 
+    { 
+        return label; 
+    }
+    float Option::getPrice() const 
+    { 
+        return price; 
+    }
+    const std::string& Option::getIntitule() const 
+    {
+        return label;
     }
 
 
+    //Methode
     void Option::display() const 
     {
         cout << "=== Option Info ===" << endl;
@@ -56,6 +89,7 @@ namespace carconfig
         cout << "Price : " << price << " €" << endl;
     }
 
+    //Opérateur
     ostream& operator<<(ostream& os, const Option& opt)
     {
         os << "Code: " << opt.getCode()
@@ -73,7 +107,7 @@ namespace carconfig
         is >> code;
 
         cout << "  Intitule : ";
-        is.ignore(); // éviter le problème du retour chariot
+        is.ignore();
         getline(is, intitule);
 
         cout << "  Prix     : ";
@@ -92,7 +126,7 @@ namespace carconfig
         return *this; 
     }
 
-    //pré-décrémentation
+
     Option Option::operator--(int i)
     {
         Option copy = *this;

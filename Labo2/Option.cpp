@@ -1,6 +1,5 @@
 #include "Option.h"
 #include <iostream>
-using namespace std;
 
 namespace carconfig {
 Option::Option() {

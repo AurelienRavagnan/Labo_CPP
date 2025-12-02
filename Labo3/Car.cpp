@@ -11,7 +11,9 @@ namespace carconfig
   //-----------Constructeurs----------
   Car::Car()
   {
+    #ifdef DEBUG
     cout << ">>> Car : constructeur par défaut <<<" << endl;
+    #endif
     name = "---";
     Model();
     for(int i =0 ; i < 5; i++){
@@ -21,7 +23,9 @@ namespace carconfig
 
   Car::Car(const string& n, Model m)
   {
+    #ifdef DEBUG
     cout << ">>> Car : constructeur d'initialisation <<<" << endl;
+    #endif
     setName(n);
     setModel(m);
     for(int i = 0 ;i < 5; i++){
@@ -31,7 +35,9 @@ namespace carconfig
 
   Car::Car(const Car& c) 
   {
+    #ifdef DEBUG
     cout << ">>> Car : constructeur de copie <<<" << endl;
+    #endif
     name = c.name;
     model = c.model;
     for (int i = 0; i < 5; ++i) {
@@ -67,7 +73,9 @@ namespace carconfig
   //---------Destructeur----------
   Car::~Car()
   {
+    #ifdef DEBUG
     cout << ">>> Car : destructeur <<<" << endl;
+    #endif
     for (int i = 0; i < 5; ++i) 
     {
       if (options[i] != nullptr) 
