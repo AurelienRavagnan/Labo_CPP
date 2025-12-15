@@ -4,6 +4,7 @@
 
 #include "Employee.h"
 #include "Actor.h"
+#include "PasswordException.h"
 
 using namespace std;
 
@@ -44,8 +45,25 @@ void Employee::setLogin(const string& login) { this->login = login; }
 void Employee::setRole(const string& role) { this->role = role; }
 
 void Employee::setPassword(const string& mdp) {
-   
+    if (mdp.length() < 6)
+        throw PasswordException("Mot de passe trop court", PasswordException::INVALID_LENGTH);
+
+    bool hasLetter = false, hasDigit = false;
+    for (char c : mdp) {
+        if (isalpha(c)) hasLetter = true; // parcourt char par char et vérifie s'il le char et soit une lettre soit un chiffre sinon lance l'exception 
+        if (isdigit(c)) hasDigit = true;
+    }
+    if (!hasLetter)
+        throw PasswordException("Mot de passe doit contenir au moins une lettre", PasswordException::ALPHA_MISSING);
+    if (!hasDigit)
+        throw PasswordException("Mot de passe doit contenir au moins un chiffre", PasswordException::DIGIT_MISSING);
+
+    delete password;
     password = new string(mdp);
+}
+void Employee::resetPassword() {
+    delete password;
+    password = nullptr;
 }
 
 // =======================

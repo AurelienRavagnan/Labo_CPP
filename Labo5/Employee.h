@@ -31,6 +31,7 @@ public:
     void setRole(const string& role);
     string getPassword() const;
     void setPassword(const string& mdp);
+    void resetPassword();
 
 
     Employee& operator=(const Employee& other);
