@@ -15,17 +15,33 @@ const string Employee::SELLER = "Vendeur";
 //  CONSTRUCTEURS
 // =======================
 
-Employee::Employee() : Actor(), login(""), password(nullptr), role("") {}
+Employee::Employee() : Actor()
+{
+    setLogin("");
+    resetPassword();
+    setRole("");
+}
+
 
 Employee::Employee(const string& last, const string& first, int id,
-                   const string& login, const string& role)
-    : Actor(id, last, first), login(login), password(nullptr), role(role) {}
+                   const string& l, const string& r)
+    : Actor(id, last, first)
+{
+    setLogin(l);
+    resetPassword();
+    setRole(r);
+}
 
-Employee::Employee(const Employee& other) : Actor(other), login(other.login), role(other.role) {
+
+Employee::Employee(const Employee& other) : Actor(other)
+{
+    setLogin(other.getLogin());
+    setRole(other.getRole());
+
     if (other.password)
-        password = new string(*other.password);
+        setPassword(other.getPassword());
     else
-        password = nullptr;
+        resetPassword();
 }
 
 // =======================
@@ -80,16 +96,19 @@ string Employee::getPassword() const { return password ? *password : ""; }
 //   OPERATEUR =
 // =======================
 
-Employee& Employee::operator=(const Employee& other) {
-    if (this != &other) {
+Employee& Employee::operator=(const Employee& other)
+{
+    if (this != &other)
+    {
         Actor::operator=(other);
-        login = other.login;
-        role = other.role;
-        delete password;
+
+        setLogin(other.getLogin());
+        setRole(other.getRole());
+
         if (other.password)
-            password = new string(*other.password);
+            setPassword(other.getPassword());
         else
-            password = nullptr;
+            resetPassword();
     }
     return *this;
 }

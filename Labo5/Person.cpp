@@ -7,11 +7,25 @@
 // Constructeurs
 //-------------------------------------------------------
 
-Person::Person() : lastName("---"), firstName("---") {}
+Person::Person()
+{
+    setLastName("---");
+    setFirstName("---");
+}
 
-Person::Person(const string& last, const string& first) : lastName(last), firstName(first) {}
 
-Person::Person(const Person& other) : lastName(other.lastName), firstName(other.firstName) {}
+Person::Person(const string& last, const string& first)
+{
+    setLastName(last);
+    setFirstName(first);
+}
+
+
+Person::Person(const Person& other)
+{
+    setLastName(other.getLastName());
+    setFirstName(other.getFirstName());
+}
 
 
 //-------------------------------------------------------
@@ -44,10 +58,12 @@ const string& Person::getFirstName() const {
 // Opérateur =
 //-------------------------------------------------------
 
-Person& Person::operator=(const Person& other) {
-    if (this != &other) {
-        lastName = other.lastName;
-        firstName = other.firstName;
+Person& Person::operator=(const Person& other)
+{
+    if (this != &other)
+    {
+        setLastName(other.getLastName());
+        setFirstName(other.getFirstName());
     }
     return *this;
 }

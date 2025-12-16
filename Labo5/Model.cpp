@@ -2,29 +2,30 @@
 #include <iostream>
 using namespace std;
 namespace carconfig{
-    Model::Model() {
-        cout << ">>> Model : constructeur par défaut <<<" << endl;
-        name = "---";
-        power = 1;
-        engine = Petrol;
-        basePrice = 1.1f;
-    }
+    Model::Model()
+{
+    setName("---");
+    setPower(1);
+    setEngine(Petrol);
+    setBasePrice(1.1f);
+}
 
-    Model::Model(const string& n, int p, Engine e, float bp) {
-        cout << ">>> Model : constructeur d'initialisation <<<" << endl;
-        name = n;
-        power = p;
-        engine = e;
-        basePrice = bp;
-    }
+    Model::Model(const string& n, int p, Engine e, float bp)
+{
+    setName(n);
+    setPower(p);
+    setEngine(e);
+    setBasePrice(bp);
+}
 
-    Model::Model(const Model& m) {
-        cout << ">>> Model : constructeur de copie <<<" << endl;
-        name = m.name;
-        power = m.power;
-        engine = m.engine;
-        basePrice = m.basePrice;
-    }
+
+    Model::Model(const Model& m)
+{
+    setName(m.getName());
+    setPower(m.getPower());
+    setEngine(m.getEngine());
+    setBasePrice(m.getBasePrice());
+}
 
     Model::~Model() {
         cout << ">>> Model : destructeur <<<" << endl;

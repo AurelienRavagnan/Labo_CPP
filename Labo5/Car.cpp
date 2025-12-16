@@ -7,41 +7,58 @@ using namespace std;
 namespace carconfig {
 
 // Constructeurs
-    Car::Car() {
-        cout << ">>> Car : constructeur par défaut <<<" << endl;
-        name = "---";
-        for (int i = 0; i < 5; ++i) options[i] = nullptr;
-    }
+    Car::Car()
+{
+    #ifdef DEBUG
+    cout << ">>> Car : constructeur par défaut <<<" << endl;
+    #endif
+    setName("---");
+    for (int i = 0; i < 5; ++i)
+        options[i] = nullptr;
+}
 
-    Car::Car(const string& n, Model m) {
-        cout << ">>> Car : constructeur d'initialisation <<<" << endl;
-        name = n;
-        model = m;
-        for (int i = 0; i < 5; ++i) options[i] = nullptr;
-    }
+Car::Car(const string& n, Model m)
+{
+    #ifdef DEBUG
+    cout << ">>> Car : constructeur d'initialisation <<<" << endl;
+    #endif
+    setName(n);
+    setModel(m);
+    for (int i = 0; i < 5; ++i)
+        options[i] = nullptr;
+}
 
-    Car::Car(const Car& c) {
-        cout << ">>> Car : constructeur de copie <<<" << endl;
-        name = c.name;
-        model = c.model;
-        for (int i = 0; i < 5; ++i) {
-            if (c.options[i] != nullptr)
-                options[i] = new Option(*c.options[i]);
-            else
-                options[i] = nullptr;
-        }
+
+Car::Car(const Car& c)
+{
+    #ifdef DEBUG
+    cout << ">>> Car : constructeur de copie <<<" << endl;
+    #endif
+    setName(c.getName());
+    setModel(c.getModel());
+
+    for (int i = 0; i < 5; ++i)
+    {
+        if (c.options[i] != nullptr)
+            options[i] = new Option(*c.options[i]);
+        else
+            options[i] = nullptr;
     }
+}
+
 
     // Destructeur
     Car::~Car() {
-        cout << ">>> Car : destructeur <<<" << endl;
-        for (int i = 0; i < 5; ++i) {
-            if (options[i] != nullptr) {
-                delete options[i];
-                options[i] = nullptr;
-            }
+    #ifdef DEBUG
+    cout << ">>> Car : destructeur <<<" << endl;
+    #endif
+    for (int i = 0; i < 5; ++i) {
+        if (options[i] != nullptr) {
+            delete options[i];
+            options[i] = nullptr;
         }
     }
+}
 
     // Setters/Getters
     void Car::setName(const string& n) { name = n; }
@@ -105,17 +122,25 @@ namespace carconfig {
     }
 
     // Surcharge opérateurs
-    Car& Car::operator=(const Car& c) {
-        if (this != &c) {
-            name = c.name;
-            model = c.model;
-            for (int i = 0; i < 5; ++i) {
-                if (options[i] != nullptr) delete options[i];
-                options[i] = (c.options[i] != nullptr) ? new Option(*c.options[i]) : nullptr;
-            }
+    Car& Car::operator=(const Car& c)
+{
+    if (this != &c)
+    {
+        setName(c.getName());
+        setModel(c.getModel());
+
+        for (int i = 0; i < 5; ++i)
+        {
+            if (options[i] != nullptr)
+                delete options[i];
+
+            options[i] = (c.options[i] != nullptr)
+                           ? new Option(*c.options[i])
+                           : nullptr;
         }
-        return *this;
     }
+    return *this;
+}
 
     Car Car::operator+(const Option& op) const {
         Car temp(*this);

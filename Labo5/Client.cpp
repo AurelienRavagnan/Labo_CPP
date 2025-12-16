@@ -4,11 +4,21 @@
 #include "Client.h"
 
 // Constructeurs
-Client::Client() : Actor(), gsm("---") {}
+Client::Client() : Actor()
+{
+    setGsm("---");
+}
 
-Client::Client(const string& last, const string& first, int id, const string& gsm) : Actor(id, last, first), gsm(gsm) {}
-Client::Client(const Client& other) : Actor(other), gsm(other.gsm) {}
+Client::Client(const string& last, const string& first, int id, const string& g)
+    : Actor(id, last, first)
+{
+    setGsm(g);
+}
 
+Client::Client(const Client& other) : Actor(other)
+{
+    setGsm(other.getGsm());
+}
 // Destructeur
 Client::~Client() {}
 
@@ -17,13 +27,16 @@ void Client::setGsm(const string& g) { gsm = g; }
 string Client::getGsm() const { return gsm; }
 
 // Opérateur =
-Client& Client::operator=(const Client& other) {
-    if (this != &other) {
-        Actor::operator=(other); // copie la partie héritée
-        gsm = other.gsm;         // copie spécifique à Client
+Client& Client::operator=(const Client& other)
+{
+    if (this != &other)
+    {
+        Actor::operator=(other);
+        setGsm(other.getGsm());
     }
     return *this;
 }
+
 
 // Affichage
 ostream& operator<<(ostream& os, const Client& c) {
