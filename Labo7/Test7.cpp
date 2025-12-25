@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Client.h"
-#include "XmlFileSerializer.hpp"
+#include "Classes/Client.h"
+#include "Classes/XmlFileSerializer.hpp"
 
 using namespace std;
 
